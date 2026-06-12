@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="铭锴纺织 Mingkai Textile 产品展示 - 涤纶、涤棉混纺、全涤格子布，全球供应">
+  <title>产品展示 | 铭锴纺织 Mingkai Textile</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/logo.jpg" alt="铭锴纺织" class="logo-img" style="width: 40px; height: 40px; border-radius: 4px; object-fit: contain;">
+        <div class="logo-text-wrapper">
+          <span class="logo-text">铭锴纺织</span>
+          <span class="logo-subtext">Mingkai Textile</span>
+        </div>
+      </a>
+      <nav class="nav" id="nav">
+        <a href="index.html" class="nav-link">首页</a>
+        <a href="products.html" class="nav-link active">产品展示</a>
+        <a href="about.html" class="nav-link">关于我们</a>
+        <a href="qualifications.html" class="nav-link">公司资质</a>
+        <a href="contact.html" class="nav-link">联系方式</a>
+      </nav>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <section style="padding-top: 120px; padding-bottom: var(--spacing-2xl); background: var(--color-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">产品中心</span>
+        <h1 class="section-title">格子布系列</h1>
+        <p class="section-desc">涤纶、涤棉混纺、全涤等多种材质，现货供应，全球配送</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="section">
+    <div class="container">
+      <!-- Category Filter -->
+      <div class="category-filter" style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-2xl); flex-wrap: wrap;">
+        <button class="btn btn-primary filter-btn active" data-category="all" style="padding: 8px 20px; font-size: 0.9rem;">全部产品</button>
+        <button class="btn btn-secondary filter-btn" data-category="涤纶" style="padding: 8px 20px; font-size: 0.9rem;">涤纶</button>
+        <button class="btn btn-secondary filter-btn" data-category="涤棉混纺" style="padding: 8px 20px; font-size: 0.9rem;">涤棉混纺</button>
+        <button class="btn btn-secondary filter-btn" data-category="全涤" style="padding: 8px 20px; font-size: 0.9rem;">全涤</button>
+        <button class="btn btn-secondary filter-btn" data-category="待分类" style="padding: 8px 20px; font-size: 0.9rem;">其他</button>
+      </div>
+
+      <!-- Products Grid - Dynamic -->
+      <div class="products-grid" id="productsGrid">
+        <!-- Products will be loaded dynamically -->
+      </div>
+
+      <!-- Notice -->
+      <div style="margin-top: var(--spacing-2xl); padding: var(--spacing-lg); background: var(--color-bg-alt); border-radius: var(--radius-lg); text-align: center;">
+        <p style="color: var(--color-text-light); margin: 0;">
+          <strong>温馨提示：</strong>以上为部分产品展示，更多规格和花色请<a href="contact.html" style="color: var(--color-primary); font-weight: 600;">联系我们</a>获取完整产品目录<br>
+          <span style="font-size: 0.9rem; color: var(--color-text-muted);">支持全球配送，货物可达世界各地</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section section-alt">
+    <div class="container">
+      <div style="text-align: center;">
+        <h2 class="section-title">找到心仪的产品？</h2>
+        <p class="section-desc" style="margin-bottom: var(--spacing-lg);">立即联系我们获取报价和样品<br>全球运输，品质保证</p>
+        <a href="contact.html" class="btn btn-primary">立即咨询</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+            <img src="images/logo.jpg" alt="铭锴纺织" style="width: 32px; height: 32px; border-radius: 4px;">
+            <div>
+              <span class="logo-text" style="color: white;">铭锴纺织</span>
+              <span style="display: block; font-size: 0.75rem; color: rgba(255,255,255,0.6);">Mingkai Textile</span>
+            </div>
+          </div>
+          <p>广州市铭锴国际贸易有限责任公司，专业格子布供应商，深耕面料行业多年，致力于为全球客户提供优质的产品和服务。</p>
+        </div>
+        <div>
+          <h4 class="footer-title">快速链接</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">首页</a></li>
+            <li><a href="products.html">产品展示</a></li>
+            <li><a href="about.html">关于我们</a></li>
+            <li><a href="contact.html">联系方式</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">产品分类</h4>
+          <ul class="footer-links">
+            <li><a href="products.html">涤纶</a></li>
+            <li><a href="products.html">涤棉混纺</a></li>
+            <li><a href="products.html">全涤</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">联系方式</h4>
+          <ul class="footer-links">
+            <li>陈先生</li>
+            <li>微信: MKGJMY888</li>
+            <li>电话: 86 18929557444</li>
+            <li>全球运输</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2024 铭锴纺织 Mingkai Textile. All rights reserved.</span>
+        <span>广州市铭锴国际贸易有限责任公司</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products-data.js"></script>
+  <script>
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+    document.getElementById('menuToggle').addEventListener('click', () => {
+      document.getElementById('nav').classList.toggle('active');
+    });
+
+    // Render products
+    function renderProducts(category = 'all') {
+      const grid = document.getElementById('productsGrid');
+      const filtered = category === 'all' 
+        ? productsData 
+        : productsData.filter(p => p.category === category);
+      
+      grid.innerHTML = filtered.map(product => `
+        <div class="product-card" data-category="${product.category}">
+          <div class="product-image">
+            <img src="${product.image}" alt="${product.name}" 
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg)); align-items: center; justify-content: center; color: var(--color-text-muted);">
+              <span>${product.id}#</span>
+            </div>
+            ${product.tag ? `<span class="product-tag">${product.tag}</span>` : ''}
+          </div>
+          <div class="product-content">
+            <h4 class="product-name">${product.name}</h4>
+            <p class="product-desc">${product.description}</p>
+            <div class="product-meta">
+              <span class="product-spec">
+                ${product.width ? `幅宽${product.width} | ` : ''}
+                ${product.weight ? `克重${product.weight} | ` : ''}
+                ${product.composition || '成分咨询'}
+              </span>
+            </div>
+            ${product.price.small !== '咨询' ? `
+            <div style="margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); border-top: 1px solid var(--color-border);">
+              <span style="font-size: 0.85rem; color: var(--color-text-muted);">
+                50米以下: ¥${product.price.small}/米 | 
+                50-100米: ¥${product.price.medium}/米 | 
+                100米以上: ¥${product.price.large}/米
+              </span>
+            </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Category filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('btn-primary', 'active');
+          b.classList.add('btn-secondary');
+        });
+        btn.classList.remove('btn-secondary');
+        btn.classList.add('btn-primary', 'active');
+        renderProducts(btn.dataset.category);
+      });
+    });
+
+    // URL parameter support for category filtering
+    function getUrlParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Map URL category param to Chinese category name
+    const categoryMap = {
+      'polyester': '涤纶',
+      'blend': '涤棉混纺',
+      'fullpoly': '全涤',
+      'others': '待分类'
+    };
+
+    // Check URL on load
+    const urlCategory = getUrlParam('category');
+    if (urlCategory && categoryMap[urlCategory]) {
+      const chineseCategory = categoryMap[urlCategory];
+      // Update button states
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('btn-primary', 'active');
+        b.classList.add('btn-secondary');
+      });
+      const targetBtn = document.querySelector(`.filter-btn[data-category="${chineseCategory}"]`);
+      if (targetBtn) {
+        targetBtn.classList.remove('btn-secondary');
+        targetBtn.classList.add('btn-primary', 'active');
+      }
+      renderProducts(chineseCategory);
+    } else {
+      renderProducts();
+    }
+  </script>
+</body>
+</html>
