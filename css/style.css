@@ -433,13 +433,16 @@ p {
    Category Cards (Concord Textile Style)
    ======================================== */
 .category-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--spacing-lg);
 }
 
 .category-card {
   position: relative;
+  flex: 1 1 260px;
+  max-width: 340px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 4/3;
@@ -534,11 +537,9 @@ p {
 }
 
 @media (max-width: 768px) {
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .category-card {
+    flex: 1 1 100%;
+    max-width: 100%;
     aspect-ratio: 16/10;
   }
 }

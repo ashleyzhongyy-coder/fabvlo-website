@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="铭锴纺织 Mingkai Textile 产品展示 - 涤纶、涤棉混纺、全涤格子布，全球供应">
+  <meta name="description" content="铭锴纺织 Mingkai Textile 产品展示 - 格子、条子、小香风、千鸟格、提花等 13 大面料系列，全球供应">
   <title>产品展示 | 铭锴纺织 Mingkai Textile</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,8 +41,8 @@
     <div class="container">
       <div class="section-header">
         <span class="section-label">产品中心</span>
-        <h1 class="section-title">格子布系列</h1>
-        <p class="section-desc">涤纶、涤棉混纺、全涤等多种材质，现货供应，全球配送</p>
+        <h1 class="section-title">产品系列</h1>
+        <p class="section-desc">格子、条子、小香风、千鸟格、提花等 13 大系列，现货供应，全球配送</p>
       </div>
     </div>
   </section>
@@ -52,11 +52,20 @@
     <div class="container">
       <!-- Category Filter -->
       <div class="category-filter" style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-2xl); flex-wrap: wrap;">
-        <button class="btn btn-primary filter-btn active" data-category="all" style="padding: 8px 20px; font-size: 0.9rem;">全部产品</button>
-        <button class="btn btn-secondary filter-btn" data-category="涤纶" style="padding: 8px 20px; font-size: 0.9rem;">涤纶</button>
-        <button class="btn btn-secondary filter-btn" data-category="涤棉混纺" style="padding: 8px 20px; font-size: 0.9rem;">涤棉混纺</button>
-        <button class="btn btn-secondary filter-btn" data-category="全涤" style="padding: 8px 20px; font-size: 0.9rem;">全涤</button>
-        <button class="btn btn-secondary filter-btn" data-category="待分类" style="padding: 8px 20px; font-size: 0.9rem;">其他</button>
+        <button class="btn btn-primary filter-btn active" data-category="all" style="padding: 8px 18px; font-size: 0.9rem;">全部产品</button>
+        <button class="btn btn-secondary filter-btn" data-category="格子系列" style="padding: 8px 18px; font-size: 0.9rem;">格子系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="条子系列" style="padding: 8px 18px; font-size: 0.9rem;">条子系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="时装:套装系列" style="padding: 8px 18px; font-size: 0.9rem;">时装/套装系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="提花系列" style="padding: 8px 18px; font-size: 0.9rem;">提花系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="小香风系列" style="padding: 8px 18px; font-size: 0.9rem;">小香风系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="千鸟格系列" style="padding: 8px 18px; font-size: 0.9rem;">千鸟格系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="磨毛-绒系列" style="padding: 8px 18px; font-size: 0.9rem;">磨毛/绒系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="巴宝莉系列" style="padding: 8px 18px; font-size: 0.9rem;">巴宝莉系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="灯芯绒系列" style="padding: 8px 18px; font-size: 0.9rem;">灯芯绒系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="仿牛仔系列" style="padding: 8px 18px; font-size: 0.9rem;">仿牛仔系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="乐丽丝系列" style="padding: 8px 18px; font-size: 0.9rem;">乐丽丝系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="人字斜" style="padding: 8px 18px; font-size: 0.9rem;">人字斜系列</button>
+        <button class="btn btn-secondary filter-btn" data-category="黑白产品" style="padding: 8px 18px; font-size: 0.9rem;">黑白产品</button>
       </div>
 
       <!-- Products Grid - Dynamic -->
@@ -111,9 +120,10 @@
         <div>
           <h4 class="footer-title">产品分类</h4>
           <ul class="footer-links">
-            <li><a href="products.html">涤纶</a></li>
-            <li><a href="products.html">涤棉混纺</a></li>
-            <li><a href="products.html">全涤</a></li>
+            <li><a href="products.html?category=grid">格子系列</a></li>
+            <li><a href="products.html?category=stripe">条子系列</a></li>
+            <li><a href="products.html?category=tweed">小香风系列</a></li>
+            <li><a href="products.html?category=jacquard">提花系列</a></li>
           </ul>
         </div>
         <div>
@@ -164,8 +174,8 @@
             ${product.tag ? `<span class="product-tag">${product.tag}</span>` : ''}
           </div>
           <div class="product-content">
-            <h4 class="product-name">${product.name}</h4>
-            <p class="product-desc">${product.description}</p>
+            <h4 class="product-name">货号 ${product.name}</h4>
+            <p class="product-desc">${product.category}</p>
             <div class="product-meta">
               <span class="product-spec">
                 ${product.width ? `幅宽${product.width} | ` : ''}
@@ -173,15 +183,6 @@
                 ${product.composition || '成分咨询'}
               </span>
             </div>
-            ${product.price.small !== '咨询' ? `
-            <div style="margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); border-top: 1px solid var(--color-border);">
-              <span style="font-size: 0.85rem; color: var(--color-text-muted);">
-                50米以下: ¥${product.price.small}/米 | 
-                50-100米: ¥${product.price.medium}/米 | 
-                100米以上: ¥${product.price.large}/米
-              </span>
-            </div>
-            ` : ''}
           </div>
         </div>
       `).join('');
@@ -206,12 +207,21 @@
       return urlParams.get(param);
     }
 
-    // Map URL category param to Chinese category name
+    // Map URL category param (slug) to Chinese series name
     const categoryMap = {
-      'polyester': '涤纶',
-      'blend': '涤棉混纺',
-      'fullpoly': '全涤',
-      'others': '待分类'
+      'grid': '格子系列',
+      'stripe': '条子系列',
+      'suiting': '时装:套装系列',
+      'jacquard': '提花系列',
+      'tweed': '小香风系列',
+      'houndstooth': '千鸟格系列',
+      'brushed': '磨毛-绒系列',
+      'check': '巴宝莉系列',
+      'corduroy': '灯芯绒系列',
+      'denim': '仿牛仔系列',
+      'lelis': '乐丽丝系列',
+      'herringbone': '人字斜',
+      'bw': '黑白产品'
     };
 
     // Check URL on load
