@@ -461,22 +461,25 @@ p {
    Category Cards (Concord Textile Style)
    ======================================== */
 .category-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-lg);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: dense;
+  gap: var(--spacing-md);
 }
 
 .category-card {
   position: relative;
-  flex: 1 1 260px;
-  max-width: 340px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  aspect-ratio: 4/3;
   display: block;
   box-shadow: var(--shadow-md);
   transition: var(--transition);
+}
+
+.category-card.featured {
+  grid-column: span 2;
+  grid-row: span 2;
 }
 
 .category-card:hover {
@@ -566,12 +569,16 @@ p {
 
 @media (max-width: 768px) {
   .category-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-sm);
   }
   .category-card {
-    flex: 1 1 44%;
-    max-width: none;
     aspect-ratio: 1 / 1;
+  }
+  .category-card.featured {
+    grid-column: span 2;
+    grid-row: auto;
+    aspect-ratio: 16 / 9;
   }
   .category-content {
     padding: var(--spacing-sm);
@@ -1053,6 +1060,10 @@ p {
    Responsive Design
    ======================================== */
 @media (max-width: 1024px) {
+  .category-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
     text-align: center;
