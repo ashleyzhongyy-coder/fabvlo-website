@@ -587,6 +587,15 @@ p {
     font-size: 0.7rem;
     padding: 2px 8px;
   }
+  .series-header {
+    align-items: stretch;
+  }
+  .series-switch {
+    width: 100%;
+  }
+  .series-select {
+    width: 100%;
+  }
 }
 
 /* ========================================
@@ -667,6 +676,77 @@ p {
 .product-spec {
   font-size: 0.85rem;
   color: var(--color-text-muted);
+}
+
+/* Series header + compact switcher (products page) */
+.series-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.series-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.series-switch label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.series-select {
+  appearance: none;
+  -webkit-appearance: none;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  background-color: var(--color-bg);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' fill='none' stroke='%23e65100' stroke-width='2' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  border: 1px solid var(--color-border);
+  border-radius: 50px;
+  padding: 11px 42px 11px 20px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.series-select:hover {
+  border-color: var(--color-primary);
+}
+
+.series-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.12);
+}
+
+/* Premium polish on product cards */
+.product-card {
+  border: 1px solid var(--color-border);
+}
+
+.product-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.product-tag {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--color-accent);
+  font-weight: 600;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 /* ========================================
@@ -1054,6 +1134,24 @@ p {
 
   .feature-desc {
     font-size: 0.85rem;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-sm);
+  }
+
+  .product-content {
+    padding: var(--spacing-sm);
+  }
+
+  .product-name {
+    font-size: 0.95rem;
+  }
+
+  .product-spec,
+  .product-desc {
+    font-size: 0.78rem;
   }
   
   .footer-grid {

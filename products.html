@@ -37,12 +37,18 @@
   </header>
 
   <!-- Page Header -->
-  <section style="padding-top: 120px; padding-bottom: var(--spacing-2xl); background: var(--color-bg-alt);">
+  <section style="padding-top: 120px; padding-bottom: var(--spacing-xl); background: var(--color-bg-alt);">
     <div class="container">
-      <div class="section-header">
-        <span class="section-label">产品中心</span>
-        <h1 class="section-title">产品系列</h1>
-        <p class="section-desc">格子、条子、小香风、千鸟格、提花等 13 大系列，现货供应，全球配送</p>
+      <div class="series-header">
+        <div class="series-header-text">
+          <span class="section-label">产品中心</span>
+          <h1 class="section-title" id="seriesTitle" style="margin-bottom: 6px;">全部产品</h1>
+          <p class="section-desc" id="seriesSub" style="margin: 0;">现货供应 · 全球配送</p>
+        </div>
+        <div class="series-switch">
+          <label for="seriesSelect">浏览其他系列</label>
+          <select id="seriesSelect" class="series-select"></select>
+        </div>
       </div>
     </div>
   </section>
@@ -50,24 +56,6 @@
   <!-- Products Section -->
   <section class="section">
     <div class="container">
-      <!-- Category Filter -->
-      <div class="category-filter" style="display: flex; justify-content: center; gap: var(--spacing-sm); margin-bottom: var(--spacing-2xl); flex-wrap: wrap;">
-        <button class="btn btn-primary filter-btn active" data-category="all" style="padding: 8px 18px; font-size: 0.9rem;">全部产品</button>
-        <button class="btn btn-secondary filter-btn" data-category="格子系列" style="padding: 8px 18px; font-size: 0.9rem;">格子系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="条子系列" style="padding: 8px 18px; font-size: 0.9rem;">条子系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="时装:套装系列" style="padding: 8px 18px; font-size: 0.9rem;">时装/套装系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="提花系列" style="padding: 8px 18px; font-size: 0.9rem;">提花系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="小香风系列" style="padding: 8px 18px; font-size: 0.9rem;">小香风系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="千鸟格系列" style="padding: 8px 18px; font-size: 0.9rem;">千鸟格系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="磨毛-绒系列" style="padding: 8px 18px; font-size: 0.9rem;">磨毛/绒系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="巴宝莉系列" style="padding: 8px 18px; font-size: 0.9rem;">巴宝莉系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="灯芯绒系列" style="padding: 8px 18px; font-size: 0.9rem;">灯芯绒系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="仿牛仔系列" style="padding: 8px 18px; font-size: 0.9rem;">仿牛仔系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="乐丽丝系列" style="padding: 8px 18px; font-size: 0.9rem;">乐丽丝系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="人字斜" style="padding: 8px 18px; font-size: 0.9rem;">人字斜系列</button>
-        <button class="btn btn-secondary filter-btn" data-category="黑白产品" style="padding: 8px 18px; font-size: 0.9rem;">黑白产品</button>
-      </div>
-
       <!-- Products Grid - Dynamic -->
       <div class="products-grid" id="productsGrid">
         <!-- Products will be loaded dynamically -->
@@ -155,93 +143,84 @@
       document.getElementById('nav').classList.toggle('active');
     });
 
-    // Render products
-    function renderProducts(category = 'all') {
+    // 13 系列定义：slug / 中文名 / 英文名
+    const SERIES = [
+      { slug: 'all',         cn: '全部产品',      en: 'All Products' },
+      { slug: 'grid',        cn: '格子系列',      en: 'Checks & Plaid' },
+      { slug: 'stripe',      cn: '条子系列',      en: 'Stripes' },
+      { slug: 'suiting',     cn: '时装:套装系列', en: 'Suiting', label: '时装/套装系列' },
+      { slug: 'jacquard',    cn: '提花系列',      en: 'Jacquard' },
+      { slug: 'tweed',       cn: '小香风系列',    en: 'Tweed' },
+      { slug: 'houndstooth', cn: '千鸟格系列',    en: 'Houndstooth' },
+      { slug: 'brushed',     cn: '磨毛-绒系列',   en: 'Brushed', label: '磨毛/绒系列' },
+      { slug: 'check',       cn: '巴宝莉系列',    en: 'Burberry-style Check' },
+      { slug: 'corduroy',    cn: '灯芯绒系列',    en: 'Corduroy' },
+      { slug: 'denim',       cn: '仿牛仔系列',    en: 'Denim-look' },
+      { slug: 'lelis',       cn: '乐丽丝系列',    en: 'Lelis' },
+      { slug: 'herringbone', cn: '人字斜',        en: 'Herringbone', label: '人字斜系列' },
+      { slug: 'bw',          cn: '黑白产品',      en: 'Black & White' },
+    ];
+    const bySlug = Object.fromEntries(SERIES.map(s => [s.slug, s]));
+    const byCn = Object.fromEntries(SERIES.map(s => [s.cn, s]));
+
+    // 填充下拉框
+    const sel = document.getElementById('seriesSelect');
+    sel.innerHTML = SERIES.map(s => {
+      const n = s.slug === 'all' ? productsData.length
+                                 : productsData.filter(p => p.category === s.cn).length;
+      return `<option value="${s.slug}">${s.label || s.cn}（${n}）</option>`;
+    }).join('');
+
+    // 渲染某个系列的全部产品
+    function render(slug) {
+      const s = bySlug[slug] || bySlug['all'];
+      const list = s.slug === 'all'
+        ? productsData
+        : productsData.filter(p => p.category === s.cn);
+
+      // 更新标题与数量
+      document.getElementById('seriesTitle').textContent = s.label || s.cn;
+      document.getElementById('seriesSub').textContent = `${s.en} · 共 ${list.length} 款现货`;
+      sel.value = s.slug;
+      document.title = `${s.label || s.cn} | 铭锴纺织 Mingkai Textile`;
+
       const grid = document.getElementById('productsGrid');
-      const filtered = category === 'all' 
-        ? productsData 
-        : productsData.filter(p => p.category === category);
-      
-      grid.innerHTML = filtered.map(product => `
-        <div class="product-card" data-category="${product.category}">
+      grid.innerHTML = list.map(product => `
+        <div class="product-card">
           <div class="product-image">
-            <img src="${product.image}" alt="${product.name}" 
+            <img src="${product.image}" alt="${product.name}" loading="lazy"
               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
               style="width: 100%; height: 100%; object-fit: cover;">
             <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg)); align-items: center; justify-content: center; color: var(--color-text-muted);">
               <span>${product.id}#</span>
             </div>
-            ${product.tag ? `<span class="product-tag">${product.tag}</span>` : ''}
+            ${s.slug === 'all' ? `<span class="product-tag">${(byCn[product.category] || {}).label || product.category}</span>` : ''}
           </div>
           <div class="product-content">
             <h4 class="product-name">货号 ${product.name}</h4>
-            <p class="product-desc">${product.category}</p>
-            <div class="product-meta">
+            <div class="product-meta" style="border-top:none; padding-top:0;">
               <span class="product-spec">
-                ${product.width ? `幅宽${product.width} | ` : ''}
-                ${product.weight ? `克重${product.weight} | ` : ''}
-                ${product.composition || '成分咨询'}
+                ${product.width ? `幅宽${product.width}` : ''}${product.weight ? ` · 克重${product.weight}` : ''}
               </span>
             </div>
+            <p class="product-desc" style="margin:8px 0 0;">${product.composition || '成分咨询'}</p>
           </div>
         </div>
       `).join('');
     }
 
-    // Category filter
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b => {
-          b.classList.remove('btn-primary', 'active');
-          b.classList.add('btn-secondary');
-        });
-        btn.classList.remove('btn-secondary');
-        btn.classList.add('btn-primary', 'active');
-        renderProducts(btn.dataset.category);
-      });
+    // 下拉切换：更新 URL 并重新渲染、回到顶部
+    sel.addEventListener('change', () => {
+      const slug = sel.value;
+      const url = slug === 'all' ? 'products.html' : `products.html?category=${slug}`;
+      history.replaceState(null, '', url);
+      render(slug);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // URL parameter support for category filtering
-    function getUrlParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
-
-    // Map URL category param (slug) to Chinese series name
-    const categoryMap = {
-      'grid': '格子系列',
-      'stripe': '条子系列',
-      'suiting': '时装:套装系列',
-      'jacquard': '提花系列',
-      'tweed': '小香风系列',
-      'houndstooth': '千鸟格系列',
-      'brushed': '磨毛-绒系列',
-      'check': '巴宝莉系列',
-      'corduroy': '灯芯绒系列',
-      'denim': '仿牛仔系列',
-      'lelis': '乐丽丝系列',
-      'herringbone': '人字斜',
-      'bw': '黑白产品'
-    };
-
-    // Check URL on load
-    const urlCategory = getUrlParam('category');
-    if (urlCategory && categoryMap[urlCategory]) {
-      const chineseCategory = categoryMap[urlCategory];
-      // Update button states
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        b.classList.remove('btn-primary', 'active');
-        b.classList.add('btn-secondary');
-      });
-      const targetBtn = document.querySelector(`.filter-btn[data-category="${chineseCategory}"]`);
-      if (targetBtn) {
-        targetBtn.classList.remove('btn-secondary');
-        targetBtn.classList.add('btn-primary', 'active');
-      }
-      renderProducts(chineseCategory);
-    } else {
-      renderProducts();
-    }
+    // 初始：按 URL 参数显示对应系列，否则全部
+    const urlSlug = new URLSearchParams(location.search).get('category');
+    render(bySlug[urlSlug] ? urlSlug : 'all');
   </script>
 </body>
 </html>
