@@ -53,6 +53,10 @@
         <div class="hero-content">
           <div class="hero-badge">中国现货 · 全球运输 · 品质保证</div>
           <h1 class="hero-title">专业<span>格子布</span>供应商</h1>
+          <div class="stock-highlight">
+            <span class="stock-highlight-text">大量现货</span>
+            <span class="stock-highlight-sub">货源充足 · 下单即发 · 全球直供</span>
+          </div>
           <p class="hero-subtitle">广州市铭锴国际贸易有限责任公司，深耕面料行业多年，专注格子布现货供应。品质稳定、货源充足、价格透明，是您值得信赖的全球合作伙伴。</p>
           <div class="hero-cta">
             <a href="products.html" class="btn btn-primary">查看产品</a>
@@ -298,25 +302,6 @@
     </div>
   </section>
 
-  <!-- Products Preview -->
-  <section class="section section-alt">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Featured Products</span>
-        <h2 class="section-title">精选产品</h2>
-        <p class="section-desc">多种规格、多种花色，满足不同需求</p>
-      </div>
-      
-      <div class="products-grid" id="featuredGrid">
-        <!-- Featured products loaded dynamically -->
-      </div>
-
-      <div style="text-align: center; margin-top: var(--spacing-xl);">
-        <a href="products.html" class="btn btn-primary">查看全部产品 View All</a>
-      </div>
-    </div>
-  </section>
-
   <!-- CTA Section -->
   <section class="section section-alt">
     <div class="container">
@@ -387,7 +372,6 @@
   </footer>
 
   <!-- JavaScript -->
-  <script src="js/products-data.js"></script>
   <script>
     // Header scroll effect
     const header = document.getElementById('header');
@@ -405,41 +389,6 @@
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
     });
-
-    // Featured products - pick a few representative items across series
-    (function renderFeatured() {
-      const grid = document.getElementById('featuredGrid');
-      if (!grid || typeof productsData === 'undefined') return;
-      const wanted = ['格子系列', '小香风系列', '千鸟格系列', '提花系列'];
-      const picks = [];
-      wanted.forEach(cat => {
-        const p = productsData.find(x => x.category === cat);
-        if (p) picks.push(p);
-      });
-      while (picks.length < 4 && picks.length < productsData.length) {
-        picks.push(productsData[picks.length]);
-      }
-      grid.innerHTML = picks.map(product => `
-        <div class="product-card">
-          <div class="product-image">
-            <img src="${product.image}" alt="${product.name}"
-              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-              style="width: 100%; height: 100%; object-fit: cover;">
-            <div style="display: none; width: 100%; height: 100%; background: linear-gradient(135deg, var(--color-bg-alt), var(--color-bg)); align-items: center; justify-content: center; color: var(--color-text-muted);">
-              <span>${product.id}#</span>
-            </div>
-          </div>
-          <div class="product-content">
-            <h4 class="product-name">货号 ${product.name}</h4>
-            <p class="product-desc">${product.category}</p>
-            <div class="product-meta">
-              <span class="product-spec">${product.width ? '幅宽' + product.width : ''}${product.weight ? ' | 克重' + product.weight : ''}</span>
-              <a href="products.html" class="btn btn-accent" style="padding: 6px 16px; font-size: 0.85rem;">详情</a>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    })();
   </script>
 </body>
 </html>
