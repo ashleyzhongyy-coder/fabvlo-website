@@ -16,11 +16,12 @@
 
   /* 中性色 - 冷调中性，与深蓝和谐 */
   --color-text: #243240;
-  --color-text-light: #5b6675;
+  --color-text-light: #586677;
   --color-text-muted: #8b94a1;
   --color-bg: #ffffff;
-  --color-bg-alt: #f3f5f8;
-  --color-border: #e2e7ee;
+  --color-page: #eaeff5;
+  --color-bg-alt: #e1e8f1;
+  --color-border: #d7e0ea;
 
   /* 字体 */
   --font-display: 'Playfair Display', 'Noto Serif SC', serif;
@@ -63,7 +64,7 @@ html {
 body {
   font-family: var(--font-body);
   color: var(--color-text);
-  background: var(--color-bg);
+  background: var(--color-page);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -90,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.2;
-  color: var(--color-text);
+  color: var(--color-accent);
 }
 
 h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
@@ -238,7 +239,7 @@ p {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-bg) 55%, #e7eef6 100%);
+  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-page) 55%, #dbe5f1 100%);
   padding-top: 80px;
   position: relative;
   overflow: hidden;
