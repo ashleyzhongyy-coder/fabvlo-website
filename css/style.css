@@ -3,25 +3,25 @@
    简约商务风格设计
    ======================================== */
 
-/* CSS Variables - 设计系统 */
+/* CSS Variables - 设计系统（深蓝暗色主题） */
 :root {
-  /* 主色调 - 深蓝（铭锴）配色 */
-  --color-primary: #1e3a5f;
-  --color-primary-light: #34618f;
-  --color-primary-dark: #142840;
+  /* 主色调 - 亮蓝强调（在深蓝底上跳出来） */
+  --color-primary: #4a86c4;
+  --color-primary-light: #71a6da;
+  --color-primary-dark: #2f5a87;
 
-  /* 点缀色 - 深蓝灰 */
-  --color-accent: #1b2b3a;
-  --color-accent-light: #34465a;
+  /* 点缀色 = 主蓝（统一强调元素） */
+  --color-accent: #4a86c4;
+  --color-accent-light: #71a6da;
 
-  /* 中性色 - 冷调中性，与深蓝和谐 */
-  --color-text: #243240;
-  --color-text-light: #586677;
-  --color-text-muted: #8b94a1;
-  --color-bg: #ffffff;
-  --color-page: #eaeff5;
-  --color-bg-alt: #e1e8f1;
-  --color-border: #d7e0ea;
+  /* 中性色 - 深蓝底 + 浅色文字 */
+  --color-text: #e9eef5;
+  --color-text-light: #b2c0d2;
+  --color-text-muted: #8492a4;
+  --color-bg: #16304b;
+  --color-page: #0f2336;
+  --color-bg-alt: #132a42;
+  --color-border: #29405c;
 
   /* 字体 */
   --font-display: 'Playfair Display', 'Noto Serif SC', serif;
@@ -40,10 +40,10 @@
   --radius-md: 8px;
   --radius-lg: 12px;
 
-  /* 阴影 - 更轻更扁平 */
-  --shadow-sm: 0 1px 2px rgba(36,50,64,0.05);
-  --shadow-md: 0 4px 16px rgba(36,50,64,0.08);
-  --shadow-lg: 0 12px 36px rgba(36,50,64,0.12);
+  /* 阴影 - 暗色主题用更深的阴影 */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.25);
+  --shadow-md: 0 6px 18px rgba(0,0,0,0.30);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.40);
   
   /* 过渡 */
   --transition: all 0.3s ease;
@@ -91,7 +91,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.2;
-  color: var(--color-accent);
+  color: var(--color-text);
 }
 
 h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
@@ -239,7 +239,7 @@ p {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  background: linear-gradient(135deg, var(--color-bg-alt) 0%, var(--color-page) 55%, #dbe5f1 100%);
+  background: linear-gradient(135deg, #0d1f31 0%, #142b43 55%, #0b1c2e 100%);
   padding-top: 80px;
   position: relative;
   overflow: hidden;
@@ -252,7 +252,7 @@ p {
   right: -20%;
   width: 80%;
   height: 150%;
-  background: radial-gradient(ellipse, rgba(30, 58, 95, 0.05) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(113, 166, 218, 0.10) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -979,7 +979,7 @@ p {
    Footer
    ======================================== */
 .footer {
-  background: var(--color-primary-dark);
+  background: #0a1828;
   color: white;
   padding: var(--spacing-2xl) 0 var(--spacing-lg);
 }
