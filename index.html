@@ -74,6 +74,22 @@
     </div>
   </section>
 
+  <!-- 货号快速查询 -->
+  <section class="sku-search">
+    <div class="container">
+      <div class="sku-search-inner">
+        <div class="sku-search-text">
+          <h2 class="sku-search-title">货号快速查询</h2>
+          <p class="sku-search-desc">已知面料货号？输入即可查看规格、成分与全部实拍图</p>
+        </div>
+        <form class="sku-search-form" id="skuForm" autocomplete="off">
+          <input type="text" id="skuInput" class="sku-search-input" placeholder="输入货号，如 768、611、2107…" aria-label="面料货号">
+          <button type="submit" class="btn btn-primary sku-search-btn">查询</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- Features Section -->
   <section class="section section-alt">
     <div class="container">
@@ -388,6 +404,14 @@
     const nav = document.getElementById('nav');
     menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
+    });
+
+    // 货号查询：跳转到产品页并按货号搜索
+    document.getElementById('skuForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const q = document.getElementById('skuInput').value.trim();
+      if (!q) { document.getElementById('skuInput').focus(); return; }
+      window.location.href = 'products.html?q=' + encodeURIComponent(q);
     });
   </script>
 </body>

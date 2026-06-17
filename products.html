@@ -207,6 +207,11 @@
       sel.value = s.slug;
       document.title = `${s.label || s.cn} | 铭锴纺织 Mingkai Textile`;
 
+      drawCards(list, s.slug === 'all');
+    }
+
+    // 把产品列表画成卡片网格
+    function drawCards(list, showTag) {
       const grid = document.getElementById('productsGrid');
       grid.innerHTML = list.map((product, i) => `
         <div class="product-card" onclick="openGallery(${i})" title="点击查看大图">
@@ -215,7 +220,7 @@
               onerror="this.onerror=null; this.src='${product.image}';"
               style="width: 100%; height: 100%; object-fit: cover;">
             ${product.images.length > 1 ? `<span class="img-count">${product.images.length} 图</span>` : ''}
-            ${s.slug === 'all' ? `<span class="product-tag">${(byCn[product.category] || {}).label || product.category}</span>` : ''}
+            ${showTag ? `<span class="product-tag">${(byCn[product.category] || {}).label || product.category}</span>` : ''}
           </div>
           <div class="product-content">
             <h4 class="product-name">货号 ${product.name}</h4>
@@ -253,6 +258,7 @@
 
     function showImg(k) {
       if (!galProduct) return;
+      resetZoom();
       const n = galProduct.images.length;
       galIndex = (k + n) % n;
       document.getElementById('lbImg').src = galProduct.images[galIndex];
@@ -281,6 +287,52 @@
       else if (e.key === 'ArrowRight') showImg(galIndex + 1);
     });
 
+    /* ===== 点击放大 + 拖动看细节 + 手机左右滑动切换 ===== */
+    const lbImgEl = document.getElementById('lbImg');
+    const ZOOM = 2.4;
+    let zoomed = false, suppressClick = false, tX0 = 0, tY0 = 0, tMoved = false;
+
+    function resetZoom() {
+      zoomed = false;
+      lbImgEl.classList.remove('zoomed');
+      lbImgEl.style.transform = 'scale(1)';
+    }
+    function panAt(cx, cy) {
+      const r = lbImgEl.getBoundingClientRect();
+      const px = Math.min(Math.max((cx - r.left) / r.width, 0), 1);
+      const py = Math.min(Math.max((cy - r.top) / r.height, 0), 1);
+      const tx = (0.5 - px) * r.width * (ZOOM - 1) / ZOOM;
+      const ty = (0.5 - py) * r.height * (ZOOM - 1) / ZOOM;
+      lbImgEl.style.transform = `scale(${ZOOM}) translate(${tx}px, ${ty}px)`;
+    }
+
+    // 桌面：点击放大/还原，移动鼠标平移
+    lbImgEl.addEventListener('click', e => {
+      e.stopPropagation();
+      if (suppressClick) { suppressClick = false; return; }
+      if (zoomed) { resetZoom(); return; }
+      zoomed = true; lbImgEl.classList.add('zoomed'); panAt(e.clientX, e.clientY);
+    });
+    lbImgEl.addEventListener('mousemove', e => { if (zoomed) panAt(e.clientX, e.clientY); });
+
+    // 手机：滑动切换（未放大时）/ 拖动平移（放大时）
+    lbImgEl.addEventListener('touchstart', e => {
+      const t = e.touches[0]; tX0 = t.clientX; tY0 = t.clientY; tMoved = false;
+    }, { passive: true });
+    lbImgEl.addEventListener('touchmove', e => {
+      const t = e.touches[0];
+      if (Math.abs(t.clientX - tX0) > 8 || Math.abs(t.clientY - tY0) > 8) tMoved = true;
+      if (zoomed) { panAt(t.clientX, t.clientY); e.preventDefault(); }
+    }, { passive: false });
+    lbImgEl.addEventListener('touchend', e => {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - tX0, dy = t.clientY - tY0;
+      if (!zoomed && Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+        showImg(galIndex + (dx < 0 ? 1 : -1));
+      }
+      if (tMoved) suppressClick = true;   // 滑动/拖动后不触发点击放大
+    }, { passive: true });
+
     // 下拉切换：更新 URL 并重新渲染、回到顶部
     sel.addEventListener('change', () => {
       const slug = sel.value;
@@ -290,9 +342,34 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 初始：按 URL 参数显示对应系列，否则全部
-    const urlSlug = new URLSearchParams(location.search).get('category');
-    render(bySlug[urlSlug] ? urlSlug : 'all');
+    /* ===== 货号搜索 ===== */
+    function renderSearch(q) {
+      q = (q || '').trim().toLowerCase();
+      const list = productsData.filter(p =>
+        String(p.id).toLowerCase().includes(q) ||
+        String(p.name).toLowerCase().includes(q));
+      currentList = list;
+      sel.value = 'all';
+      document.getElementById('seriesTitle').textContent = `搜索：${q}`;
+      document.getElementById('seriesSub').textContent =
+        list.length ? `找到 ${list.length} 款相关面料` : '未找到该货号，请确认后重试';
+      document.title = `搜索 ${q} | 铭锴纺织 Mingkai Textile`;
+      const grid = document.getElementById('productsGrid');
+      if (!list.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:var(--spacing-2xl) 0; color:var(--color-text-muted);">
+          没有找到货号包含「${q}」的面料。<br>请检查货号，或 <a href="products.html" style="color:var(--color-primary);font-weight:600;">浏览全部产品</a>。</div>`;
+        return;
+      }
+      drawCards(list);
+      if (list.length === 1) openGallery(0);   // 唯一结果直接打开大图
+    }
+
+    // 初始：?q 搜索优先，其次 ?category 系列，否则全部
+    const params = new URLSearchParams(location.search);
+    const urlQ = params.get('q');
+    const urlSlug = params.get('category');
+    if (urlQ) renderSearch(urlQ);
+    else render(bySlug[urlSlug] ? urlSlug : 'all');
   </script>
 </body>
 </html>

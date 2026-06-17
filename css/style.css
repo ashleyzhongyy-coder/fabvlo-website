@@ -1258,6 +1258,13 @@ p {
   border-radius: var(--radius-md);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   background: #fff;
+  cursor: zoom-in;
+  touch-action: none;
+  transition: transform 0.15s ease;
+}
+#lbImg.zoomed {
+  cursor: zoom-out;
+  transition: none;
 }
 
 .lb-info {
@@ -1358,4 +1365,73 @@ p {
   .lb-prev { left: 8px; }
   .lb-next { right: 8px; }
   .lb-thumbs img { width: 52px; height: 52px; }
+}
+
+/* ========================================
+   首页货号快速查询
+   ======================================== */
+.sku-search {
+  background: linear-gradient(135deg, var(--color-accent) 0%, #2c2c2c 100%);
+  padding: var(--spacing-xl) 0;
+}
+
+.sku-search-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+}
+
+.sku-search-title {
+  color: #fff;
+  margin: 0 0 4px;
+  font-size: clamp(1.4rem, 3vw, 2rem);
+}
+
+.sku-search-desc {
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.sku-search-form {
+  display: flex;
+  gap: var(--spacing-sm);
+  flex: 1 1 360px;
+  max-width: 520px;
+}
+
+.sku-search-input {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 14px 20px;
+  border: 1px solid transparent;
+  border-radius: 50px;
+  background: #fff;
+  color: var(--color-text);
+  box-shadow: var(--shadow-md);
+}
+.sku-search-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.25);
+}
+
+.sku-search-btn {
+  flex: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+}
+
+@media (max-width: 768px) {
+  .sku-search-inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+  .sku-search-form {
+    max-width: none;
+  }
 }
