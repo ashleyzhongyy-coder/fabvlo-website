@@ -74,17 +74,6 @@
     </div>
   </section>
 
-  <!-- 货号快速查询（紧凑搜索条） -->
-  <section class="sku-search">
-    <div class="container">
-      <form class="sku-search-form" id="skuForm" autocomplete="off">
-        <span class="sku-search-label">货号查询</span>
-        <input type="text" id="skuInput" class="sku-search-input" placeholder="输入货号查看详情，如 768" aria-label="面料货号">
-        <button type="submit" class="sku-search-btn">查询</button>
-      </form>
-    </div>
-  </section>
-
   <!-- Features Section -->
   <section class="section section-alt">
     <div class="container">
@@ -150,8 +139,14 @@
       <div class="section-header">
         <span class="section-label">Product Categories</span>
         <h2 class="section-title">产品分类</h2>
-        <p class="section-desc">13 大系列，现货供应，满足您的不同需求</p>
+        <p class="section-desc">13 大系列，现货供应；已知货号可直接查询</p>
       </div>
+
+      <!-- 货号查询：与分类放在一起 -->
+      <form class="sku-search-form" id="skuForm" autocomplete="off">
+        <input type="text" id="skuInput" class="sku-search-input" placeholder="输入货号直达，如 768、611、2107…" aria-label="面料货号">
+        <button type="submit" class="sku-search-btn">查询</button>
+      </form>
 
       <div class="category-grid">
         <a href="products.html?category=grid" class="category-card featured">
